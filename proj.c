@@ -205,7 +205,7 @@ exit(1);
  uid=(st_file.st_uid);
  links =(st_file.st_nlink);
  int fd;
-  fd=open(entry->d_name,O_RDONLY);
+  fd=open(path,O_RDONLY);
   if(fd==-1)
     {
   perror("error open normal file");
