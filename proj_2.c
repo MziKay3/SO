@@ -364,3 +364,4 @@ exit(1);
  
  return 0;
   }
+//probleme: un al doilea proces pentru convertirea in gri la bmp / scrierea a cator linii sau scris in statistica.txt
