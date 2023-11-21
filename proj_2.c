@@ -6,6 +6,8 @@
 #include <sys/stat.h>
 #include <string.h>
 #include <time.h>
+#include <sys/wait.h>
+
 
 
 void citire_director(char *director,char *directoro)
@@ -38,6 +40,21 @@ while((entry=readdir(dir))!=NULL)
 	  perror("stat error");
 	  exit(1);
 	}
+      
+
+      pid_t pid = fork();
+
+            if (pid == -1)
+	    {
+                perror("fork error");
+                exit(1);
+            }
+
+            if (pid == 0)
+	     { // Child process
+	      //int file_fd;
+
+		
       //director
   if(S_ISDIR(st_file.st_mode))
     {
@@ -312,11 +329,18 @@ exit(1);
       perror("error close output file");
       exit(1);
     }
-}
- 
- 
     }
+ exit(0);
+	     }
+	    else // Parent process
+	      { 
+                int status;
+                waitpid(pid, &status, 0);
+                printf("S-a incheiat procesul cu pid-ul %d si codul %d pentru %s\n", pid, status, entry->d_name);
+ 
+	      }
  }
+}
  
  if(closedir(dir)==-1)
 {
@@ -324,7 +348,7 @@ perror("close director");
 exit(1);
 }
 
-  }
+}
     
   int main(int argc,char *argv[])
   {
@@ -340,5 +364,3 @@ exit(1);
  
  return 0;
   }
-
-
