@@ -1,7 +1,7 @@
 #!/bin/bash
 
 count=0;
-if [ "$#" -ne 1 ]; then
+if [ "$#" != 1 ]; then
     echo "Mod de utilizare: $0 <c>"
     exit 1
 fi
